@@ -14,6 +14,7 @@ namespace Tests.TestData.TypiCode
         {
             this.Url = @"myUrl";
             this.ContentType = ContentType.Json;
+
         }
     }
 }
