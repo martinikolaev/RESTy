@@ -54,7 +54,7 @@
     <Compile Include="Common\HeaderProvider.cs" />
     <Compile Include="Common\Interfaces\IRESTful.cs" />
     <Compile Include="Common\NameAttribute.cs" />
-    <Compile Include="Common\RESTFulAttribute.cs" />
+    <Compile Include="Common\RESTFulMap.cs" />
     <Compile Include="Common\RESTfulRequest.cs" />
     <Compile Include="Common\RESTfulResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

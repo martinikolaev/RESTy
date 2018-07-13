@@ -50,10 +50,11 @@
   <ItemGroup>
     <Compile Include="TestData\DogApi\RandomBreedsRequest.cs" />
     <Compile Include="TestData\DogApi\RandomBreedsResponse.cs" />
-    <Compile Include="TestData\TypiCode\TypiCodeRequest.cs" />
-    <Compile Include="TestData\TypiCode\TypiCodeResponse.cs" />
+    <Compile Include="TestData\TypiCode\TypiCodePostRequest.cs" />
+    <Compile Include="TestData\TypiCode\TypiCodePostResponse.cs" />
     <Compile Include="DogApiTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypiApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
