@@ -91,7 +91,7 @@ namespace RESTy.Common
 
         private static string GetDescription(this PropertyInfo property)
         {
-            var value = property.GetCustomAttribute<Description>()?.GetDescription();
+            var value = property.GetCustomAttribute<DescriptionAttribute>()?.GetDescription();
             return value ?? string.Empty;
         }
 

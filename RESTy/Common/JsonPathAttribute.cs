@@ -3,13 +3,13 @@
 namespace RESTy.Common
 {
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public class JsonMap : Attribute
+    public class JsonPathAttribute : Attribute
     {
         /// <summary>
         /// JSON mapping with JsonPath
         /// </summary>
         /// <param name="jsonProperty"></param>
-        public JsonMap(string jsonPath)
+        public JsonPathAttribute(string jsonPath)
         {
             this.JsonPath = jsonPath;
         }

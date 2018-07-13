@@ -17,7 +17,7 @@ namespace RESTy.Common.Extensions
         public static string GetDescription<T>(this T enumValue) where T : IConvertible => enumValue.GetType()
                             .GetMember(enumValue.ToString())?
                             .First()?
-                            .GetCustomAttribute<Description>()?
+                            .GetCustomAttribute<DescriptionAttribute>()?
                             .GetDescription();
 
         

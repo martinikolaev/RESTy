@@ -8,10 +8,9 @@ namespace Tests.TestData.DogApi
     {
         #region Public Properties
 
-        [JsonMap("$.message")]
+        [JsonPath("$.message")]
         public string status { get; set; }
 
-        [JsonProperty("message")]
         public string message { get;set; }
 
         #endregion

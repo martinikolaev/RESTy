@@ -12,7 +12,7 @@ namespace RESTy.Common.Extensions
         public static string GetJsonPath<T>(this T obj) => obj.GetType()
                             .GetMember(obj.ToString())?
                             .First()?
-                            .GetCustomAttribute<JsonMap>()?
+                            .GetCustomAttribute<JsonPathAttribute>()?
                             .JsonPath;
 
         public static string GetJsonProperty<T>(this T obj) => obj.GetType()

@@ -3,9 +3,9 @@
 namespace RESTy.Common
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
-    public class Description : Attribute
+    public class DescriptionAttribute : Attribute
     {
-        public Description(string value)
+        public DescriptionAttribute(string value)
         {
             this.Value = value;
         }

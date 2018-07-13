@@ -5,7 +5,7 @@ namespace Tests.TestData.TypiCode
 {
     public class TypiCodePostResponse : RESTFulResponse
     {
-        [JsonMap("$")]
+        [JsonPath("$")]
         [JsonProperty("TestProperty")]
         public Post[] Posts { get; set; }
 

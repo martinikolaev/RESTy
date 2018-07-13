@@ -15,6 +15,12 @@ namespace RESTy.Common.Content
     {
         public string Content { get; set ; }
 
+
+        /// <summary>
+        /// Deserialize given Json into desired class. Checking for 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         public T ProcessContent(string content)
         {
             if (string.IsNullOrEmpty(content)) return default(T);
@@ -42,7 +48,7 @@ namespace RESTy.Common.Content
 
             foreach (var property in properties)
             {
-
+                //If has JsonPath attribute available
                 if (property.HasJsonMapAttribute())
                 {
                     var jsonMap = property.GetJsonMap();
@@ -52,6 +58,7 @@ namespace RESTy.Common.Content
                     if (jToken != null)
                         this.AssignValue(obj, property, jToken);
                 }
+                //If has JsonProperty attribute
                 else if (property.HasJsonAttribute())
                 {
                     var jsonProp = property.GetJsonAttribute();
@@ -60,6 +67,17 @@ namespace RESTy.Common.Content
 
                     this.AssignValue(obj, property, jProperty);
 
+                }
+                //If has no attribute
+                else
+                {
+                    var propertyName = property.Name;
+                    var jValue = jObject[propertyName];
+
+                    if (jValue != null)
+                    {
+                        this.AssignValue(obj, property, jValue);
+                    }
                 }
             }
 
@@ -74,7 +92,7 @@ namespace RESTy.Common.Content
 
             foreach (var property in properties)
             {
-
+                //If has JsonPath attribute available
                 if (property.HasJsonMapAttribute())
                 {
                     var jsonMap = property.GetJsonMap();
@@ -84,14 +102,29 @@ namespace RESTy.Common.Content
                     if (jToken != null)
                         this.AssignValue(obj, property, jToken);
                 }
+                //If has JsonProperty attribute
                 else if (property.HasJsonAttribute())
                 {
-                    var jsonProp = property.GetJsonAttribute();
+                    var jsonPropName = property.GetJsonAttribute();
 
-                    var jProperty = jObject[jsonProp];
+                    var jValue = jObject[jsonPropName];
 
-                    this.AssignValue(obj, property, jProperty);
-                    
+                    if(jValue != null)
+                    {
+                        this.AssignValue(obj, property, jValue);
+                    }
+
+                }
+                //If has no attribute
+                else
+                {
+                    var propertyName = property.Name;
+                    var jValue = jObject[propertyName];
+
+                    if (jValue != null)
+                    {
+                        this.AssignValue(obj, property, jValue);
+                    }
                 }
             }
             
@@ -116,8 +149,6 @@ namespace RESTy.Common.Content
                 }
             }
         }
-
-
 
         private static bool IsJsonArray(string json)
         {
