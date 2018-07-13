@@ -13,7 +13,7 @@ namespace RESTy.Common
     public static class ContentReader
     {
         public static T Reader<T>(string json, T instance)            
-            where T : IRESTfulResponse, new()
+            where T : IRESTfulResponse
         {
 
             //var jsonObject = JArray.Parse(json);

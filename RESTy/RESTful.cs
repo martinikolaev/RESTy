@@ -9,7 +9,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RESTy
 {
@@ -93,7 +92,7 @@ namespace RESTy
                 var instance = new TResult();
                 //dynamic response = ContentProvider.Deserialize<TResult>(result.Content);
 
-                ContentReader.Reader(result.Content, instance);
+                instance = ContentReader.Reader(result.Content, instance);
 
                 instance.Response = result;
                 instance.Map();

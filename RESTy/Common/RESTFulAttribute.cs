@@ -3,25 +3,20 @@
 namespace RESTy.Common
 {
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
-    public class RESTFulAttribute : Attribute
+    public class RESTFulMap : Attribute
     {
-        public RESTFulAttribute(string jsonProperty)
+        public RESTFulMap(string jsonProperty)
         {
             this.JsonProperty = jsonProperty;
         }
 
-        public RESTFulAttribute(string jsonProperty, string jsonPath)
+        public RESTFulMap(string jsonProperty, string jsonPath)
         {
             this.JsonPath = jsonPath;
             this.JsonProperty = JsonProperty;
         }
 
-        public string GetJsonProperty() => JsonProperty;
-
-        public string GetJsonPath() => JsonPath;
-
-
-        public string JsonPath { get; set; }
-        public string JsonProperty { get; set; }
+        public string JsonPath { get; private set; }
+        public string JsonProperty { get; private set; }
     }
 }

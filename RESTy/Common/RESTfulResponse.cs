@@ -6,8 +6,9 @@ namespace RESTy.Common
     public abstract class RESTFulResponse : IRESTfulResponse
     {
         #region Public Properties
+
         public RESTFulResponseInternal Response { get; set; }
-        public ContentType ContentType { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public ContentType ContentType { get; set; }
 
         #endregion
 
