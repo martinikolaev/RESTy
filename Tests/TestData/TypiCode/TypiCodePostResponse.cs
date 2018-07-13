@@ -1,10 +1,12 @@
-﻿using RESTy.Common;
+﻿using Newtonsoft.Json;
+using RESTy.Common;
 
 namespace Tests.TestData.TypiCode
 {
     public class TypiCodePostResponse : RESTFulResponse
     {
-        [RESTFulMap("", "$")]
+        [JsonMap("$")]
+        [JsonProperty("TestProperty")]
         public Post[] Posts { get; set; }
 
         public override void Map()

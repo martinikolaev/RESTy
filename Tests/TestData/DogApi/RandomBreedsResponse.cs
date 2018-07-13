@@ -1,4 +1,5 @@
-﻿using RESTy.Common;
+﻿using Newtonsoft.Json;
+using RESTy.Common;
 using System;
 
 namespace Tests.TestData.DogApi
@@ -7,7 +8,10 @@ namespace Tests.TestData.DogApi
     {
         #region Public Properties
 
+        [JsonMap("$.message")]
         public string status { get; set; }
+
+        [JsonProperty("message")]
         public string message { get;set; }
 
         #endregion

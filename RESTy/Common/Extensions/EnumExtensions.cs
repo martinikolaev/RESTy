@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -9,7 +10,7 @@ namespace RESTy.Common.Extensions
         #region Public Methods
 
         /// <summary>
-        /// Will retrieve the DisplayName of an enum
+        /// Will retrieve the Description of an enum
         /// </summary>
         /// <param name="enumValue"></param>
         /// <returns></returns>
@@ -18,6 +19,8 @@ namespace RESTy.Common.Extensions
                             .First()?
                             .GetCustomAttribute<Description>()?
                             .GetDescription();
+
+        
 
         /// <summary>
         /// Will get any input and check if mactches with any given Enum

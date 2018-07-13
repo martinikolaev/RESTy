@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace RESTy.Common.Extensions
 {
@@ -22,7 +25,7 @@ namespace RESTy.Common.Extensions
             foreach (var element in source)
                 target.Add(element);
         }
-
+        
         #endregion
     }
 }
