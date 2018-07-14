@@ -23,6 +23,7 @@ namespace Tests
             Assert.IsNotNull(response);
             Assert.IsNotNull(response.Response);
             Assert.IsFalse(string.IsNullOrEmpty(response.Response.Content));
+            Assert.IsNotNull(response.Posts);
 
         }
     }

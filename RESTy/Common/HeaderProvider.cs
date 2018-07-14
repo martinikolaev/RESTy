@@ -23,7 +23,12 @@ namespace RESTy.Common
 
     public class HeaderProvider
     {
-
+        /// <summary>
+        /// Returns all headers default and custom
+        /// </summary>
+        /// <param name="accessToken"></param>
+        /// <param name="keyValues"></param>
+        /// <returns></returns>
         public static Dictionary<string, string> GetHeaders(string accessToken, params KeyValue[] keyValues)
         {
             var headerCollection = new Dictionary<string, string>();

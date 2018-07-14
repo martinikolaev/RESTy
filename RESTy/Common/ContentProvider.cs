@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
+using RESTy.Common.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RESTy.Common
 {
@@ -12,6 +10,13 @@ namespace RESTy.Common
     {
         #region Public Methods
 
+
+        /// <summary>
+        /// Transforms the object into a selected content type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static dynamic GetContent<T>(T obj) where T : RESTFulRequest
         {
             if (obj.ContentType == ContentType.Form)
@@ -20,20 +25,6 @@ namespace RESTy.Common
                 return GetJsonContent(obj);
 
             return null;
-        }
-
-        public static dynamic GenerateRequestObject<T>(T obj) where T : RESTFulRequest
-        {
-            if (obj.ContentType == ContentType.Json)
-                return ContentProvider.GetJsonContent(obj);
-            else if (obj.ContentType == ContentType.Form)
-                return ContentProvider.GetFormContent(obj);
-            //else if (obj.ContentType == ContentType.Xml)
-            //{
-            //    //to be continued
-            //}
-
-            throw new InvalidOperationException("Content type could not be resolved or not supported");
         }
 
         /// <summary>
@@ -88,13 +79,6 @@ namespace RESTy.Common
 
             return form;
         }
-
-        private static string GetDescription(this PropertyInfo property)
-        {
-            var value = property.GetCustomAttribute<DescriptionAttribute>()?.GetDescription();
-            return value ?? string.Empty;
-        }
-
 
         #endregion
     }

@@ -2,12 +2,7 @@
 using RESTy.Common.Extensions;
 using RESTy.Common.Helpers;
 using RESTy.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RESTy.Common.Content
 {
@@ -15,9 +10,11 @@ namespace RESTy.Common.Content
     {
         public string Content { get; set ; }
 
+        #region Public Methods
 
         /// <summary>
-        /// Deserialize given Json into desired class. Checking for 
+        /// Deserialize given Json into desired class. It searches for attributes in 
+        /// the following order: JsonPathAttribute, JsonPropertyAttribute, PropertyName
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
@@ -26,7 +23,7 @@ namespace RESTy.Common.Content
             if (string.IsNullOrEmpty(content)) return default(T);
 
             var instance = new T();
-            
+
             if (IsJsonArray(content))
             {
                 instance = this.ProcessJsonArray(JArray.Parse(content), instance);
@@ -40,39 +37,53 @@ namespace RESTy.Common.Content
             return instance;
         }
 
-        private T ProcessJsonArray(JArray jObject, T obj)
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Deserializes JsonArray into an object of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="jArray"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private T ProcessJsonArray(JArray jArray, T obj)
         {
-            if (jObject == null) return obj;
+            if (jArray == null) return obj;
 
             var properties = Reflection.GetProperties(obj);
 
             foreach (var property in properties)
             {
                 //If has JsonPath attribute available
-                if (property.HasJsonMapAttribute())
+                if (property.HasJsonPathAttribute())
                 {
-                    var jsonMap = property.GetJsonMap();
+                    var jsonMap = property.GetJsonPath();
 
-                    var jToken = jObject.SelectToken(jsonMap);
+                    var jToken = jArray.SelectToken(jsonMap);
 
                     if (jToken != null)
+                    {
                         this.AssignValue(obj, property, jToken);
+                    }
                 }
                 //If has JsonProperty attribute
                 else if (property.HasJsonAttribute())
                 {
-                    var jsonProp = property.GetJsonAttribute();
+                    var jsonPropName = property.GetJsonProperty();
 
-                    var jProperty = jObject[jsonProp];
+                    var jValue = jArray[jsonPropName];
 
-                    this.AssignValue(obj, property, jProperty);
-
+                    if (jValue != null)
+                    {
+                        this.AssignValue(obj, property, jValue);
+                    }
                 }
                 //If has no attribute
                 else
                 {
                     var propertyName = property.Name;
-                    var jValue = jObject[propertyName];
+                    var jValue = jArray[propertyName];
 
                     if (jValue != null)
                     {
@@ -84,6 +95,12 @@ namespace RESTy.Common.Content
             return obj;
         }
 
+        /// <summary>
+        /// Deserializes JsonObject into an object of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="jObject"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         private T ProcessJsonObject(JObject jObject, T obj)
         {
             if (jObject == null) return obj;
@@ -93,27 +110,28 @@ namespace RESTy.Common.Content
             foreach (var property in properties)
             {
                 //If has JsonPath attribute available
-                if (property.HasJsonMapAttribute())
+                if (property.HasJsonPathAttribute())
                 {
-                    var jsonMap = property.GetJsonMap();
+                    var jsonMap = property.GetJsonPath();
 
                     var jToken = jObject.SelectToken(jsonMap);
 
                     if (jToken != null)
+                    {
                         this.AssignValue(obj, property, jToken);
+                    }
                 }
                 //If has JsonProperty attribute
                 else if (property.HasJsonAttribute())
                 {
-                    var jsonPropName = property.GetJsonAttribute();
+                    var jsonPropName = property.GetJsonProperty();
 
                     var jValue = jObject[jsonPropName];
 
-                    if(jValue != null)
+                    if (jValue != null)
                     {
                         this.AssignValue(obj, property, jValue);
                     }
-
                 }
                 //If has no attribute
                 else
@@ -127,29 +145,39 @@ namespace RESTy.Common.Content
                     }
                 }
             }
-            
+
             return obj;
         }
 
+        /// <summary>
+        /// Instantiates and set value of variable in an object.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="property"></param>
+        /// <param name="jToken"></param>
         private void AssignValue(object obj, PropertyInfo property, JToken jToken)
         {
-            if (property != null)
+            if (property == null) return;
+
+            //create new object with property type
+            var retrivableObject = jToken.ToObject(property.PropertyType);
+
+            //if successful
+            if (retrivableObject != null)
             {
-                //create new object with property type
-                var retrivableObject = jToken.ToObject(property.PropertyType);
+                //Get Setter MethodInfo
+                MethodInfo setMethodInfo = property.GetSetMethod(false);
 
-                //if successful
-                if (retrivableObject != null)
-                {
-                    //Get Setter MethodInfo
-                    MethodInfo setMethodInfo = property.GetSetMethod(false);
-
-                    //Invoke the SetMethod to assign the new property
-                    setMethodInfo.Invoke(obj, new object[] { retrivableObject });
-                }
+                //Invoke the SetMethod to assign the new property
+                setMethodInfo.Invoke(obj, new object[] { retrivableObject });
             }
         }
 
+        /// <summary>
+        /// Cheks if the provided Json is JObject or JArray.
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         private static bool IsJsonArray(string json)
         {
             var token = JToken.Parse(json);
@@ -163,6 +191,6 @@ namespace RESTy.Common.Content
             return false;
         }
 
-        
+        #endregion
     }
 }
