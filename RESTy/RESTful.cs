@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Text;
 
 namespace RESTy
@@ -104,23 +103,7 @@ namespace RESTy
                 throw new InvalidOperationException($"RESTful Exception: {result.StatusCode}\nError: {result.Content}");
             }
         }
-
-        private static void TestConverter<TResult>(TResult obj, string json)
-        {
-            var properties = obj
-                .GetType()
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p => p.GetValue(obj, null) != null);
-
-            foreach (PropertyInfo prop in properties)
-            {
-                var currentField = prop.GetValue(obj, null);
-
-
-            }
-
-        }
-
+        
         #region RESTFul Methods
 
         /// <summary>
