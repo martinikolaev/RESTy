@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RESTy.Common
+namespace RESTy.Common.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     public class JsonPathAttribute : Attribute

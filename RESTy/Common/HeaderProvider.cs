@@ -26,18 +26,18 @@ namespace RESTy.Common
         /// <summary>
         /// Returns all headers default and custom
         /// </summary>
-        /// <param name="accessToken"></param>
+        /// <param name="securityToken"></param>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> GetHeaders(string accessToken, params KeyValue[] keyValues)
+        public static Dictionary<string, string> GetHeaders(string securityToken, params KeyValue[] keyValues)
         {
             var headerCollection = new Dictionary<string, string>();
 
-            if (!string.IsNullOrEmpty(accessToken))
+            if (!string.IsNullOrEmpty(securityToken))
             {
                 headerCollection = new Dictionary<string, string>
                 {
-                    ["Authorization"] = $"Bearer {accessToken}"
+                    ["Authorization"] = $"Bearer {securityToken}"
                 };
             }
 

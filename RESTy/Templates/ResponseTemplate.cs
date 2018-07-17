@@ -2,16 +2,21 @@
 
 namespace RESTy.Templates
 {
-    public class ResponseTemplate : RESTFulResponse
+    class ResponseTemplate : RESTFulResponse
     {
         #region Public Properties
-
-
+        
         #endregion
 
         public ResponseTemplate()
         {
 
         }
+
+        public override void Map()
+        {
+
+        }
+
     }
 }

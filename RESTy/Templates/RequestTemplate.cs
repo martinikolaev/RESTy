@@ -2,7 +2,7 @@
 
 namespace RESTy.Templates
 {
-    public class RequestTemplate : RESTFulRequest
+    class RequestTemplate : RESTFulRequest
     {
         public RequestTemplate()
         {

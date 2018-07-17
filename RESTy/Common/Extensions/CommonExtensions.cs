@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RESTy.Common.Attributes;
 using System.Linq;
 using System.Reflection;
 

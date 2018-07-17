@@ -53,11 +53,16 @@
   <ItemGroup>
     <Compile Include="TestData\DogApi\RandomBreedsRequest.cs" />
     <Compile Include="TestData\DogApi\RandomBreedsResponse.cs" />
+    <Compile Include="TestData\ShibeOnline\ShibesRequest.cs" />
+    <Compile Include="TestData\ShibeOnline\ShibesResponse.cs" />
     <Compile Include="TestData\TypiCode\TypiCodePostRequest.cs" />
     <Compile Include="TestData\TypiCode\TypiCodePostResponse.cs" />
     <Compile Include="DogApiTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestData\TypiCode\TypiUserReponse.cs" />
+    <Compile Include="TestData\TypiCode\TypiUsersRequest.cs" />
     <Compile Include="TypiApiTests.cs" />
+    <Compile Include="ShibesApiTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

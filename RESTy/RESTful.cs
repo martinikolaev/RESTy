@@ -19,14 +19,14 @@ namespace RESTy
 
         #region Public Methods
 
-        public static TResult GET<TResult>(this RESTFulRequest obj, string accessToken = "")
+        public static TResult GET<TResult>(this RESTFulRequest obj, string securityToken = "")
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
 
             var url = obj.Url;
             var contentType = obj.ContentType.GetDescription();
-            var headers = HeaderProvider.GetHeaders(accessToken, obj.CustomHeaders.ToArray());
+            var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
 
             var result = RESTFul.GetInternal(url, contentType, headers);
@@ -34,7 +34,7 @@ namespace RESTy
             return RESTFul.ResponseProcessor<TResult>(result);
         }
 
-        public static TResult POST<TResult>(this RESTFulRequest obj, string accessToken = "")
+        public static TResult POST<TResult>(this RESTFulRequest obj, string securityToken = "")
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
@@ -42,14 +42,14 @@ namespace RESTy
             var url = obj.Url;
             var content = ContentProvider.GetContent(obj);
             var contentType = obj.ContentType.GetDescription();
-            var headers = HeaderProvider.GetHeaders(accessToken, obj.CustomHeaders.ToArray());
+            var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
             var result = RESTFul.PostInternal(obj.Url, content, contentType, headers);
 
             return RESTFul.ResponseProcessor<TResult>(result);
         }
 
-        public static TResult PUT<TResult>(this RESTFulRequest obj, string accessToken = "")
+        public static TResult PUT<TResult>(this RESTFulRequest obj, string securityToken = "")
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
@@ -57,7 +57,7 @@ namespace RESTy
             var url = obj.Url;
             var content = ContentProvider.GetContent(obj);
             var contentType = obj.ContentType.GetDescription();
-            var headers = HeaderProvider.GetHeaders(accessToken, obj.CustomHeaders.ToArray());
+            var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
             var result = RESTFul.PutInternal(obj.Url, content, contentType, headers);
 
@@ -72,7 +72,7 @@ namespace RESTy
 
             var url = obj.Url;
             var contentType = obj.ContentType.GetDescription();
-            var headers = HeaderProvider.GetHeaders(accessToken, obj.CustomHeaders.ToArray());
+            var headers = HeaderProvider.GetHeaders(accessToken, obj.RequestHeaders.ToArray());
 
             var result = RESTFul.DeleteInternal(obj.Url, contentType, headers);
 
@@ -89,8 +89,7 @@ namespace RESTy
             if (result.IsSuccessStatusCode)
             {
                 var instance = new TResult();
-                //dynamic response = ContentProvider.Deserialize<TResult>(result.Content);
-
+                
                 instance = ContentReader.Reader(result.Content, instance);
 
                 instance.Response = result;

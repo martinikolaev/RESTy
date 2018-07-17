@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using RESTy.Common;
-using System;
+﻿using RESTy.Common;
+using RESTy.Common.Attributes;
 
 namespace Tests.TestData.DogApi
 {
@@ -17,7 +16,7 @@ namespace Tests.TestData.DogApi
 
         public RandomBreedsResponse()
         {
-
+            this.ContentType = ContentType.Json;
         }
     }
 }

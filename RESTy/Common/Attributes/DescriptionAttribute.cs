@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RESTy.Common
+namespace RESTy.Common.Attributes
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class DescriptionAttribute : Attribute

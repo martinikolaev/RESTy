@@ -46,10 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Attributes\IgnoreAttribute.cs" />
     <Compile Include="Common\CommType.cs" />
     <Compile Include="Common\ContentProvider.cs" />
     <Compile Include="Common\ContentReader.cs" />
     <Compile Include="Common\Content\JsonContentReader.cs" />
+    <Compile Include="Common\Content\XmlContentReader.cs" />
+    <Compile Include="Common\Extensions\CollectionExtensions.cs" />
     <Compile Include="Common\Extensions\PropertyInfoExtensions.cs" />
     <Compile Include="Common\Helpers\Reflection.cs" />
     <Compile Include="Common\Interfaces\IContentReader.cs" />
@@ -57,10 +60,11 @@
     <Compile Include="Common\Extensions\CommonExtensions.cs" />
     <Compile Include="Common\HeaderProvider.cs" />
     <Compile Include="Common\Interfaces\IRESTful.cs" />
-    <Compile Include="Common\DescriptionAttribute.cs" />
-    <Compile Include="Common\JsonPathAttribute.cs" />
+    <Compile Include="Common\Attributes\DescriptionAttribute.cs" />
+    <Compile Include="Common\Attributes\JsonPathAttribute.cs" />
     <Compile Include="Common\RESTfulRequest.cs" />
     <Compile Include="Common\RESTfulResponse.cs" />
+    <Compile Include="Common\Attributes\XPathAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\RequestTemplate.cs" />
     <Compile Include="RESTful.cs" />

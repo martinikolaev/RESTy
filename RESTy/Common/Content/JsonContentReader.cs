@@ -2,6 +2,7 @@
 using RESTy.Common.Extensions;
 using RESTy.Common.Helpers;
 using RESTy.Common.Interfaces;
+using System;
 using System.Reflection;
 
 namespace RESTy.Common.Content
@@ -70,7 +71,7 @@ namespace RESTy.Common.Content
                 //If has JsonProperty attribute
                 else if (property.HasJsonAttribute())
                 {
-                    var jsonPropName = property.GetJsonProperty();
+                    var jsonPropName = property.GetJsonPropertyName();
 
                     var jValue = jArray[jsonPropName];
 
@@ -124,7 +125,7 @@ namespace RESTy.Common.Content
                 //If has JsonProperty attribute
                 else if (property.HasJsonAttribute())
                 {
-                    var jsonPropName = property.GetJsonProperty();
+                    var jsonPropName = property.GetJsonPropertyName();
 
                     var jValue = jObject[jsonPropName];
 
@@ -182,13 +183,12 @@ namespace RESTy.Common.Content
         {
             var token = JToken.Parse(json);
 
-
             if (token is JArray)
                 return true;
             else if (token is JObject)
                 return false;
-
-            return false;
+            else
+                throw new InvalidOperationException("The content is not JArray nor JObject");
         }
 
         #endregion

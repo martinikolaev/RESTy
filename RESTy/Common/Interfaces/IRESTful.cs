@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RESTy.Common.Attributes;
+using System.Collections.Generic;
 
 namespace RESTy.Common.Interfaces
 {
@@ -12,7 +13,12 @@ namespace RESTy.Common.Interfaces
         #region Public Properties
 
         string Url { get; set; }
-        List<KeyValue> CustomHeaders { get; set; }
+        List<KeyValue> RequestHeaders { get; set; }
+
+        List<KeyValue> GetParameters();
+        void AddGetParameter(KeyValue keyValue);
+
+
 
         #endregion
     }

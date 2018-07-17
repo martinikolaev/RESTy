@@ -4,9 +4,16 @@ namespace Tests.TestData.TypiCode
 {
     public class TypiCodePostRequest : RESTFulRequest
     {
-        public TypiCodePostRequest()
+
+        #region Public Properties
+
+        
+
+        #endregion
+
+        public TypiCodePostRequest(string homeUrl)
         {
-            this.Url = "https://jsonplaceholder.typicode.com/posts";
+            this.Url = $@"{homeUrl}/posts";
             this.ContentType = ContentType.Json;
         }
     }
