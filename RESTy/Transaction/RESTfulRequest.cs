@@ -1,10 +1,10 @@
-﻿using RESTy.Common.Interfaces;
+﻿using RESTy.Transaction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     public abstract class RESTFulRequest : IRESTfulRequest
     {

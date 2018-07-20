@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace RESTy.Common.Interfaces
+namespace RESTy.Transaction.Interfaces
 {
     public interface IRESTful
     {

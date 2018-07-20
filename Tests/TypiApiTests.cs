@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RESTy;
-using RESTy.Common;
+using RESTy.Transaction;
 using Tests.TestData.TypiCode;
 
 namespace Tests

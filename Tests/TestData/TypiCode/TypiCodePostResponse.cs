@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
-using RESTy.Common;
-using RESTy.Common.Attributes;
+using RESTy.Transaction;
+using RESTy.Transaction.Attributes;
 
 namespace Tests.TestData.TypiCode
 {

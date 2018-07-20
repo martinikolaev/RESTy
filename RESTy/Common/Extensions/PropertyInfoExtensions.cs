@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using RESTy.Common.Attributes;
+using RESTy.Transaction.Attributes;
 using System.Linq;
 using System.Reflection;
 
-namespace RESTy.Common.Extensions
+namespace RESTy.Transaction.Extensions
 {
     internal static class PropertyInfoExtensions
     {

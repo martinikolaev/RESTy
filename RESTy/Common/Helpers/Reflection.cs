@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace RESTy.Common.Helpers
+namespace RESTy.Transaction.Helpers
 {
     public static class Reflection
     {

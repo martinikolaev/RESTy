@@ -1,8 +1,8 @@
-﻿using RESTy.Common.Content;
-using RESTy.Common.Interfaces;
+﻿using RESTy.Transaction.Content;
+using RESTy.Transaction.Interfaces;
 using System;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     internal static class ContentReader
     {

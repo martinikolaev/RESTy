@@ -1,4 +1,4 @@
-﻿namespace RESTy.Common.Interfaces
+﻿namespace RESTy.Transaction.Interfaces
 {
     internal interface IContentReader<T> where T : IRESTfulResponse, new()
     {

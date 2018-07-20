@@ -1,6 +1,6 @@
-﻿using RESTy.Common.Extensions;
-using RESTy.Common.Interfaces;
-using RESTy.Common.RestMethods.Common;
+﻿using RESTy.Transaction.Extensions;
+using RESTy.Transaction.Interfaces;
+using RESTy.Transaction.RestMethods.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,9 +9,9 @@ using System.Net.Http.Headers;
 using System.Text;
 
 
-namespace RESTy.Common.RestMethods
+namespace RESTy.Transaction.RestMethods
 {
-    public static class PostMethod
+    internal static class PostMethod
     {
         public static RESTFulResponseInternal Post(string url, object content, string contentType, Dictionary<string, string> requestHeaders)
         {

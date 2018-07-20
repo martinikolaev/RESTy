@@ -1,5 +1,5 @@
-﻿using RESTy.Common;
-using RESTy.Common.Attributes;
+﻿using RESTy.Transaction;
+using RESTy.Transaction.Attributes;
 using System.Collections.Generic;
 
 namespace Tests.TestData.ShibeOnline

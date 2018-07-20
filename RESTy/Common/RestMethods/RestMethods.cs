@@ -1,9 +1,9 @@
-﻿namespace RESTy.Common.RestMethods
+﻿namespace RESTy.Transaction.RestMethods
 {
     /// <summary>
     /// Supported HTTPMethods
     /// </summary>
-    public enum RestMethods
+    internal enum RestMethods
     {
         GET,
         DELETE,

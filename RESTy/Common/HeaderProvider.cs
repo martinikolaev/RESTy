@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     public class KeyValue
     {

@@ -1,4 +1,4 @@
-﻿using RESTy.Common.RestMethods.Common;
+﻿using RESTy.Transaction.RestMethods.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,9 +6,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace RESTy.Common.RestMethods
+namespace RESTy.Transaction.RestMethods
 {
-    public static class PutMethod
+    internal static class PutMethod
     {
 
         public static RESTFulResponseInternal Put(string url, object content, string contentType, Dictionary<string, string> requestHeaders)
@@ -17,6 +17,13 @@ namespace RESTy.Common.RestMethods
         }
 
 
+        /// <summary>
+        /// Calls the REST api with PUT method.
+        /// </summary>
+        /// <param name="url">The url for the REST api.</param>
+        /// <param name="acceptType">The accept type string.</param>
+        /// <param name="requestHeaders">The request headers for the REST api.</param>
+        /// <returns>The http response having status code and content.</returns>
         private static RESTFulResponseInternal PutInternal(string url, object content, string contentType, Dictionary<string, string> requestHeaders)
         {
             // Create http client with auto disposition

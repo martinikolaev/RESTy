@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using RESTy.Common.Extensions;
+using RESTy.Transaction.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     internal static class ContentProvider
     {

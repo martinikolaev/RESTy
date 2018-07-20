@@ -1,4 +1,4 @@
-﻿using RESTy.Common;
+﻿using RESTy.Transaction;
 
 namespace RESTy.Templates
 {

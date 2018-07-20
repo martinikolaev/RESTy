@@ -1,6 +1,6 @@
-﻿using RESTy.Common.Attributes;
+﻿using RESTy.Transaction.Attributes;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     public enum ContentType
     {

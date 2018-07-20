@@ -1,7 +1,7 @@
-﻿using RESTy.Common.Interfaces;
+﻿using RESTy.Transaction.Interfaces;
 using System.Net;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     public abstract class RESTFulResponse : IRESTfulResponse
     {

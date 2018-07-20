@@ -1,7 +1,7 @@
-﻿using RESTy.Common.Interfaces;
+﻿using RESTy.Transaction.Interfaces;
 using System;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     internal static class RESTfulResponseProcessor
     {

@@ -1,16 +1,11 @@
-﻿using RESTy.Common;
-using RESTy.Common.Extensions;
-using RESTy.Common.Interfaces;
-using RESTy.Common.RestMethods;
+﻿using RESTy.Transaction.Extensions;
+using RESTy.Transaction.Interfaces;
+using RESTy.Transaction.RestMethods;
 
-namespace RESTy
+namespace RESTy.Transaction
 {
     public static class RESTFul
     {
-        #region Public Fields
-
-        #endregion
-
         #region Public Methods
 
         public static TResult GET<TResult>(this RESTFulRequest obj, string securityToken = "")

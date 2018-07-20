@@ -1,10 +1,10 @@
-﻿using RESTy.Common.RestMethods.Common;
+﻿using RESTy.Transaction.RestMethods.Common;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 
-namespace RESTy.Common.RestMethods
+namespace RESTy.Transaction.RestMethods
 {
-    public static class DeleteMethod
+    internal static class DeleteMethod
     {
         public static RESTFulResponseInternal Delete(string url, string acceptType, Dictionary<string, string> requestHeaders)
         {

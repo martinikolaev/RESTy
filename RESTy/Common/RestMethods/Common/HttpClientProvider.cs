@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 
-namespace RESTy.Common.RestMethods.Common
+namespace RESTy.Transaction.RestMethods.Common
 {
-    public class HttpClientProvider
+    internal class HttpClientProvider
     {
         /// <summary>
         /// Creates the http client with the specified request headers.

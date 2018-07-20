@@ -1,13 +1,13 @@
-﻿using RESTy.Common.Extensions;
-using RESTy.Common.Helpers;
-using RESTy.Common.Interfaces;
+﻿using RESTy.Transaction.Extensions;
+using RESTy.Transaction.Helpers;
+using RESTy.Transaction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RESTy.Common.Content
+namespace RESTy.Transaction.Content
 {
     internal class XmlContentReader<T> : IContentReader<T> where T : IRESTfulResponse, new()
     {
