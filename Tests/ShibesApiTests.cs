@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RESTy.Transaction;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RESTy;
 using Tests.TestData.ShibeOnline;
 
 namespace Tests
