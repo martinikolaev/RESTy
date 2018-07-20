@@ -80,6 +80,17 @@ namespace RESTy.Transaction.Extensions
         public static string GetDescription(this PropertyInfo property) => property.GetCustomAttribute<DescriptionAttribute>().GetDescription();
         #endregion
 
+        #region Required Attributes
+
+        /// <summary>
+        /// Checks if the property has XPathAttributes
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        public static bool IsRequired(this PropertyInfo property) => property.GetCustomAttributes().Any(a => a.GetType() == typeof(RequiredAttribute));
+
+        #endregion
+
         #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RESTy.Transaction.Extensions;
+using RESTy.Transaction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,15 @@ namespace RESTy.Transaction
 
         public static dynamic Provide<T>(T obj) where T: RESTFulRequest
         {
-            switch (obj.ContentType)
+            switch (obj.AcceptType)
             {
-                case ContentType.None:
+                case AcceptType.None:
                     return null;
-                case ContentType.Json:
+                case AcceptType.Json:
                     return GetJsonContent(obj);
-                case ContentType.Xml:
+                case AcceptType.Xml:
                     break;
-                case ContentType.Form:
+                case AcceptType.Form:
                     return GetFormContent(obj);
                 default: throw new InvalidOperationException("Content of the object could not be recognized");
                     

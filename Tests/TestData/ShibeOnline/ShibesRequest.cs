@@ -12,7 +12,7 @@ namespace Tests.TestData.ShibeOnline
         public ShibesRequest()
         {
             this.Url = @"http://shibe.online/api/shibes?count=99&urls=true&httpsUrls=false";
-            this.ContentType = ContentType.Json;
+            this.AcceptType = AcceptType.Json;
         }
     }
 }

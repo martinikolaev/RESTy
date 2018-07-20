@@ -8,61 +8,61 @@ namespace RESTy.Transaction
     {
         #region Public Methods
 
-        public static TResult GET<TResult>(this RESTFulRequest obj, string securityToken = "")
+        public static TResult GET<TResult>(this IRESTfulRequest obj, string securityToken = "")
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
 
             var url = obj.Url;
-            var contentType = obj.ContentType.GetDescription();
+            var acceptType = obj.AcceptType.GetDescription();
             var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
-            var result = GetMethod.Get(url, contentType, headers);
+            var result = GetMethod.Get(url, acceptType, headers);
 
             return RESTfulResponseProcessor.ResponseProcessor<TResult>(result);
         }
 
-        public static TResult POST<TResult>(this RESTFulRequest obj, string securityToken = "")
+        public static TResult POST<TResult>(this IRESTfulRequest obj, string securityToken = "")
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
 
             var url = obj.Url;
-            var content = ContentProvider.Provide(obj);
-            var contentType = obj.ContentType.GetDescription();
+            var content = ContentProvider.Provide((RESTFulRequest)obj);
+            var acceptType = obj.AcceptType.GetDescription();
             var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
-            var result = PostMethod.Post(obj.Url, content, contentType, headers);
+            var result = PostMethod.Post(obj.Url, content, acceptType, headers);
 
             return RESTfulResponseProcessor.ResponseProcessor<TResult>(result);
         }
 
-        public static TResult PUT<TResult>(this RESTFulRequest obj, string securityToken = "")
+        public static TResult PUT<TResult>(this IRESTfulRequest obj, string securityToken = "")
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
 
             var url = obj.Url;
-            var content = ContentProvider.Provide(obj);
-            var contentType = obj.ContentType.GetDescription();
+            var content = ContentProvider.Provide((RESTFulRequest)obj);
+            var acceptType = obj.AcceptType.GetDescription();
             var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
-            var result = PutMethod.Put(obj.Url, content, contentType, headers);
+            var result = PutMethod.Put(obj.Url, content, acceptType, headers);
 
             return RESTfulResponseProcessor.ResponseProcessor<TResult>(result);
         }
 
-        public static TResult DELETE<TResult>(this RESTFulRequest obj, string accessToken = "")
+        public static TResult DELETE<TResult>(this IRESTfulRequest obj, string accessToken = "")
             where TResult : IRESTfulResponse, new()
         {
 
             if (obj == null) return default(TResult);
 
             var url = obj.Url;
-            var contentType = obj.ContentType.GetDescription();
+            var acceptType = obj.AcceptType.GetDescription();
             var headers = HeaderProvider.GetHeaders(accessToken, obj.RequestHeaders.ToArray());
 
-            var result = DeleteMethod.Delete(obj.Url, contentType, headers);
+            var result = DeleteMethod.Delete(obj.Url, acceptType, headers);
 
             return RESTfulResponseProcessor.ResponseProcessor<TResult>(result);
         }

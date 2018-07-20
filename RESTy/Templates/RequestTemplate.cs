@@ -7,7 +7,7 @@ namespace RESTy.Templates
         public RequestTemplate()
         {
             this.Url = @"myUrl";
-            this.ContentType = ContentType.Json;
+            this.AcceptType = AcceptType.Json;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Tests.TestData.TypiCode
         public TypiUsersRequest(string homeUrl)
         {
             this.Url = $@"{homeUrl}/users";
-            this.ContentType = ContentType.Json;
+            this.AcceptType = AcceptType.Json;
         }
     }
 

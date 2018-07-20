@@ -14,7 +14,7 @@ namespace Tests.TestData.TypiCode
         public TypiCodePostRequest(string homeUrl)
         {
             this.Url = $@"{homeUrl}/posts";
-            this.ContentType = ContentType.Json;
+            this.AcceptType = AcceptType.Json;
         }
     }
 }

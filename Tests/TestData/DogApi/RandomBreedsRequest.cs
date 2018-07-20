@@ -7,7 +7,7 @@ namespace Tests.TestData.DogApi
         public RandomBreedsRequest()
         {
             this.Url = @"https://dog.ceo/api/breed/hound/images/random";
-            this.ContentType = ContentType.Json;
+            this.AcceptType = AcceptType.Json;
         }
     }
 }

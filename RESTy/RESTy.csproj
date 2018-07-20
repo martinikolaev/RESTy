@@ -63,6 +63,7 @@
     <Compile Include="Common\Interfaces\IRESTful.cs" />
     <Compile Include="Common\Attributes\DescriptionAttribute.cs" />
     <Compile Include="Common\Attributes\JsonPathAttribute.cs" />
+    <Compile Include="Common\RequestValidator.cs" />
     <Compile Include="Transaction\RESTfulRequest.cs" />
     <Compile Include="Transaction\RESTfulResponse.cs" />
     <Compile Include="Common\Attributes\XPathAttribute.cs" />

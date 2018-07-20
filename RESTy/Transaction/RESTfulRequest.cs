@@ -14,8 +14,8 @@ namespace RESTy.Transaction
 
         public string Url { get => this.GetUrl(); set => baseUrl = value; }
         public List<KeyValue> RequestHeaders { get; set; }
-        public ContentType ContentType { get; set; }
         public List<KeyValue> QueryParameters { get; set; }
+        public AcceptType AcceptType { get; set; }
 
         #endregion
 
