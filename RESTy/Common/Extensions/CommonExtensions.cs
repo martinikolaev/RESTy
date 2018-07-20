@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace RESTy.Common.Extensions
 {
-    public static class CommonExtensions
+    internal static class CommonExtensions
     {
         public static string GetDescription<T>(this T obj) => obj.GetType()
                             .GetMember(obj.ToString())?

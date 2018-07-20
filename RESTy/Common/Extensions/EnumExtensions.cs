@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Linq;
-using System.Reflection;
+﻿using System;
 
 namespace RESTy.Common.Extensions
 {
-    public static class EnumExtentions
+    internal static class EnumExtentions
     {
         #region Public Methods
 

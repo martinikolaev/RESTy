@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace RESTy.Common.Extensions
 {
-    public static class PropertyInfoExtensions
+    internal static class PropertyInfoExtensions
     {
         #region Public Methods
 

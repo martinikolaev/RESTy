@@ -1,5 +1,4 @@
-﻿using RESTy.Common.Attributes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace RESTy.Common.Interfaces
 {
