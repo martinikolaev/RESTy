@@ -54,13 +54,30 @@ namespace RESTy.Common.Extensions
         /// <param name="property"></param>
         /// <returns></returns>
         public static bool HasXpathAttribute(this PropertyInfo property) => property.GetCustomAttributes().Any(a => a.GetType() == typeof(XPathAttribute));
-        
+
         /// <summary>
         /// Gets the value of XPathAttribute
         /// </summary>
         /// <param name="property"></param>
         /// <returns></returns>
         public static string GetXPath(this PropertyInfo property) => property.GetCustomAttribute<XPathAttribute>().XPath;
+        #endregion
+
+        #region Description Methods
+
+        /// <summary>
+        /// Checks if the property has XPathAttributes
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        public static bool HasDescription(this PropertyInfo property) => property.GetCustomAttributes().Any(a => a.GetType() == typeof(DescriptionAttribute));
+
+        /// <summary>
+        /// Gets the value of XPathAttribute
+        /// </summary>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        public static string GetDescription(this PropertyInfo property) => property.GetCustomAttribute<DescriptionAttribute>().GetDescription();
         #endregion
 
         #endregion

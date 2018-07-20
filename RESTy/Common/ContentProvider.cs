@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RESTy.Common.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,22 +12,24 @@ namespace RESTy.Common
         #region Public Methods
 
 
-        /// <summary>
-        /// Transforms the object into a selected content type
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static dynamic GetContent<T>(T obj) where T : RESTFulRequest
+        public static dynamic Provide<T>(T obj) where T: RESTFulRequest
         {
-            if (obj.ContentType == ContentType.Form)
-                return GetFormContent(obj);
-            else if (obj.ContentType == ContentType.Json)
-                return GetJsonContent(obj);
-
+            switch (obj.ContentType)
+            {
+                case ContentType.None:
+                    return null;
+                case ContentType.Json:
+                    return GetJsonContent(obj);
+                case ContentType.Xml:
+                    break;
+                case ContentType.Form:
+                    return GetFormContent(obj);
+                default: throw new InvalidOperationException("Content of the object could not be recognized");
+                    
+            }
             return null;
         }
-
+        
         /// <summary>
         /// Serializes any object into JSON string
         /// </summary>
@@ -44,7 +47,7 @@ namespace RESTy.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="jsonText"></param>
         /// <returns></returns>
-        public static T Deserialize<T>(string jsonText)
+        private static T Deserialize<T>(string jsonText)
         {
             return JsonConvert.DeserializeObject<T>(jsonText);
         }
@@ -71,7 +74,7 @@ namespace RESTy.Common
             {
                 var currentField = prop.GetValue(obj, null);
 
-                if (!string.IsNullOrEmpty(prop.GetDescription()))
+                if (prop.HasDescription())
                     form.Add(prop.GetDescription(), currentField.ToString());
                 else
                     form.Add(prop.Name, currentField.ToString());

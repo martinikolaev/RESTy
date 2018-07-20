@@ -26,6 +26,9 @@ namespace RESTy
 
             var url = obj.Url;
             var contentType = obj.ContentType.GetDescription();
+            //var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
+
+
             var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
 
@@ -40,7 +43,7 @@ namespace RESTy
             if (obj == null) return default(TResult);
 
             var url = obj.Url;
-            var content = ContentProvider.GetContent(obj);
+            var content = ContentProvider.Provide(obj);
             var contentType = obj.ContentType.GetDescription();
             var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
@@ -55,13 +58,13 @@ namespace RESTy
             if (obj == null) return default(TResult);
 
             var url = obj.Url;
-            var content = ContentProvider.GetContent(obj);
+            var content = ContentProvider.Provide(obj);
             var contentType = obj.ContentType.GetDescription();
             var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
 
             var result = RESTFul.PutInternal(obj.Url, content, contentType, headers);
 
-            return ResponseProcessor<TResult>(result);
+            return RESTFul.ResponseProcessor<TResult>(result);
         }
 
         public static TResult DELETE<TResult>(this RESTFulRequest obj, string accessToken = "")
@@ -76,7 +79,7 @@ namespace RESTy
 
             var result = RESTFul.DeleteInternal(obj.Url, contentType, headers);
 
-            return ResponseProcessor<TResult>(result);
+            return RESTFul.ResponseProcessor<TResult>(result);
         }
 
         #endregion
@@ -86,10 +89,11 @@ namespace RESTy
         public static TResult ResponseProcessor<TResult>(RESTFulResponseInternal result)
             where TResult : IRESTfulResponse, new()
         {
+
             if (result.IsSuccessStatusCode)
             {
                 var instance = new TResult();
-                
+
                 instance = ContentReader.Reader(result.Content, instance);
 
                 instance.Response = result;
@@ -102,8 +106,12 @@ namespace RESTy
                 throw new InvalidOperationException($"RESTful Exception: {result.StatusCode}\nError: {result.Content}");
             }
         }
-        
+
         #region RESTFul Methods
+
+        #region HTTP Clients
+
+        
 
         /// <summary>
         /// Creates the http client with the specified request headers.
@@ -144,7 +152,15 @@ namespace RESTy
             // Return the http client
             return httpClient;
         }
+        
+        #endregion
 
+
+        #region PostMethods
+
+
+
+        #endregion
 
         /// <summary>
         /// Calls the REST api with POST method.
@@ -189,6 +205,7 @@ namespace RESTy
                 return new RESTFulResponseInternal(result.StatusCode, result.IsSuccessStatusCode, responseContent);
             }
         }
+
 
         private static RESTFulResponseInternal PutInternal(string url, object content, string contentType, Dictionary<string, string> requestHeaders)
         {

@@ -35,10 +35,7 @@ namespace RESTy.Common
 
             if (!string.IsNullOrEmpty(securityToken))
             {
-                headerCollection = new Dictionary<string, string>
-                {
-                    ["Authorization"] = $"Bearer {securityToken}"
-                };
+                headerCollection.Add("Authorization", $"Bearer {securityToken}");
             }
 
             if (keyValues != null && keyValues.Length > 0)
