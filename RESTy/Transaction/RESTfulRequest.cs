@@ -46,8 +46,6 @@ namespace RESTy.Transaction
 
         private string GetUrl()
         {
-            if (string.IsNullOrEmpty(baseUrl)) throw new InvalidOperationException($"{nameof(baseUrl)} is empty!");
-
             var urlSb = new StringBuilder($"{baseUrl}");
 
             if (this.QueryParameters.Any())

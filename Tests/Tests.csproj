@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="TestData\DogApi\RandomBreedsRequest.cs" />
     <Compile Include="TestData\DogApi\RandomBreedsResponse.cs" />
+    <Compile Include="TestData\NegaviteScenarios\DummyRequest.cs" />
+    <Compile Include="TestData\NegaviteScenarios\DummyResponse.cs" />
     <Compile Include="TestData\ShibeOnline\ShibesRequest.cs" />
     <Compile Include="TestData\ShibeOnline\ShibesResponse.cs" />
     <Compile Include="TestData\TypiCode\TypiCodePostRequest.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="TestData\TypiCode\TypiUsersRequest.cs" />
     <Compile Include="TypiApiTests.cs" />
     <Compile Include="ShibesApiTests.cs" />
+    <Compile Include="RequiredFieldsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

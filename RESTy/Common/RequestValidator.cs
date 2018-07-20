@@ -2,6 +2,7 @@
 using RESTy.Transaction.Helpers;
 using RESTy.Transaction.Interfaces;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace RESTy.Common
@@ -9,34 +10,26 @@ namespace RESTy.Common
     internal static class RequestValidator
     {
         /// <summary>
-        /// Will validate that <paramref name="transactionObject"/> has all required properties instantiated.
+        /// Validates that <paramref name="transactionObject"/> has all Required properties instantiated.
         /// </summary>
         /// <typeparam name="TRequest">Transaction object</typeparam>
         /// <param name="transactionObject"></param>
         /// <exception cref="InvalidOperationException">If non instanciated Required properties are being found.</exception>
-        public static bool Validate<TRequest>(TRequest transactionObject) where TRequest : ITransaction
+        public static void Validate<TRequest>(TRequest transactionObject) where TRequest : ITransaction
         {
-            StringBuilder exceptionMessage = new StringBuilder($"The following properties in {typeof(TRequest)} are declared as Required but not instanciated in this transaction: {Environment.NewLine}");
+            StringBuilder exceptionMessage = new StringBuilder($"The following properties in {transactionObject.GetType()} are declared as Required but not instanciated in this transaction: {Environment.NewLine}");
 
-            int counter = 0;
 
-            var properties = Reflection.GetAllProperties(transactionObject);
+            var violation = Reflection.GetAllProperties(transactionObject)
+                                    .Where(p => p.IsRequired())
+                                    .Where(p => p.GetValue(transactionObject) == null || string.IsNullOrWhiteSpace(p.GetValue(transactionObject).ToString()))
+                                    .ToList();
 
-            // loop thorugh all props
-            foreach (var prop in properties)
+            if (violation.Any())
             {
-                // find a required property
-                if (prop.IsRequired())
-                {
-                    if(prop.GetValue(transactionObject) == null)
-                    {
-                        counter++;
-                        exceptionMessage.Append($"{prop.Name} is not instanciated. {Environment.NewLine}");
-                    }
-                }
+                violation.ForEach(p => exceptionMessage.Append($"{p.Name} - {Environment.NewLine}"));
+                throw new InvalidOperationException(exceptionMessage.ToString());
             }
-
-            return counter == 0 ? true : throw new InvalidOperationException(exceptionMessage.ToString());
         }
     }
 }
