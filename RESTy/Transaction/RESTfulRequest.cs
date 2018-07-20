@@ -1,4 +1,5 @@
-﻿using RESTy.Transaction.Interfaces;
+﻿using RESTy.Transaction.Attributes;
+using RESTy.Transaction.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,16 @@ namespace RESTy.Transaction
 
         private string baseUrl { get; set; }
 
+        [Required]
         public string Url { get => this.GetUrl(); set => baseUrl = value; }
-        public List<KeyValue> RequestHeaders { get; set; }
-        public List<KeyValue> QueryParameters { get; set; }
+
+        [Required]
         public AcceptType AcceptType { get; set; }
 
+
+        public List<KeyValue> RequestHeaders { get; set; }
+        public List<KeyValue> QueryParameters { get; set; }
+        
         #endregion
 
         public RESTFulRequest()

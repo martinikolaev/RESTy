@@ -1,4 +1,5 @@
-﻿using RESTy.Transaction.Interfaces;
+﻿using RESTy.Transaction.Attributes;
+using RESTy.Transaction.Interfaces;
 using System.Net;
 
 namespace RESTy.Transaction
@@ -7,9 +8,11 @@ namespace RESTy.Transaction
     {
         #region Public Properties
 
-        public RESTFulResponseInternal Response { get; set; }
+        [Required]
         public ContentType ContentType { get; set; }
 
+        public RESTFulResponseInternal Response { get; set; }
+        
         #endregion
 
         #region Public Constructors

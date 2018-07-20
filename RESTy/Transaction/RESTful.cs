@@ -1,4 +1,5 @@
-﻿using RESTy.Transaction.Extensions;
+﻿using RESTy.Common;
+using RESTy.Transaction.Extensions;
 using RESTy.Transaction.Interfaces;
 using RESTy.Transaction.RestMethods;
 
@@ -13,6 +14,8 @@ namespace RESTy.Transaction
         {
             if (obj == null) return default(TResult);
 
+            RequestValidator.Validate(obj);
+
             var url = obj.Url;
             var acceptType = obj.AcceptType.GetDescription();
             var headers = HeaderProvider.GetHeaders(securityToken, obj.RequestHeaders.ToArray());
@@ -26,6 +29,7 @@ namespace RESTy.Transaction
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
+            RequestValidator.Validate(obj);
 
             var url = obj.Url;
             var content = ContentProvider.Provide((RESTFulRequest)obj);
@@ -41,6 +45,8 @@ namespace RESTy.Transaction
             where TResult : IRESTfulResponse, new()
         {
             if (obj == null) return default(TResult);
+            RequestValidator.Validate(obj);
+
 
             var url = obj.Url;
             var content = ContentProvider.Provide((RESTFulRequest)obj);
@@ -57,6 +63,7 @@ namespace RESTy.Transaction
         {
 
             if (obj == null) return default(TResult);
+            RequestValidator.Validate(obj);
 
             var url = obj.Url;
             var acceptType = obj.AcceptType.GetDescription();
