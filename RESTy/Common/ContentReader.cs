@@ -4,7 +4,7 @@ using System;
 
 namespace RESTy.Common
 {
-    public static class ContentReader
+    internal static class ContentReader
     {
         /// <summary>
         /// Takes the provided content and deserialize it in type specified by <see cref="ContentType"/>.

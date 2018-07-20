@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace RESTy.Common
 {
-    public static class ContentProvider
+    internal static class ContentProvider
     {
         #region Public Methods
 

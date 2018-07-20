@@ -21,7 +21,7 @@ namespace RESTy.Common
         public string Value { get; set; }
     }
 
-    public class HeaderProvider
+    internal class HeaderProvider
     {
         /// <summary>
         /// Returns all headers default and custom

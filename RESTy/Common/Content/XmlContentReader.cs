@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RESTy.Common.Content
 {
-    public class XmlContentReader<T> : IContentReader<T> where T : IRESTfulResponse, new()
+    internal class XmlContentReader<T> : IContentReader<T> where T : IRESTfulResponse, new()
     {
 
         public string Content { get; set; }

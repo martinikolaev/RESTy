@@ -1,6 +1,6 @@
 ﻿namespace RESTy.Common.Interfaces
 {
-    public interface IContentReader<T> where T : IRESTfulResponse, new()
+    internal interface IContentReader<T> where T : IRESTfulResponse, new()
     {
         string Content { get; set; }
 

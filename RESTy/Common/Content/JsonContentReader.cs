@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace RESTy.Common.Content
 {
-    public class JsonContentReader<T> : IContentReader<T> where T : IRESTfulResponse, new()
+    internal class JsonContentReader<T> : IContentReader<T> where T : IRESTfulResponse, new()
     {
         public string Content { get; set ; }
 
