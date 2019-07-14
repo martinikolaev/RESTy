@@ -1,7 +1,12 @@
-﻿namespace RESTy.Common
+﻿using RESTy.Transaction.Attributes;
+
+namespace RESTy.Transaction
 {
     public enum ContentType
     {
+
+        None,
+
         [Description("application/json")]
         Json,
 
@@ -14,6 +19,9 @@
 
     public enum AcceptType
     {
+        
+        None, 
+
         [Description("application/json")]
         Json,
 

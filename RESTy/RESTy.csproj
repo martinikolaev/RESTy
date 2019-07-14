@@ -33,11 +33,15 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.4.3.0\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.5.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.5.4\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.4.0\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,10 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Attributes\IgnoreAttribute.cs" />
+    <Compile Include="Common\Attributes\RequiredAttribute.cs" />
     <Compile Include="Common\CommType.cs" />
     <Compile Include="Common\ContentProvider.cs" />
     <Compile Include="Common\ContentReader.cs" />
     <Compile Include="Common\Content\JsonContentReader.cs" />
+    <Compile Include="Common\Content\XmlContentReader.cs" />
+    <Compile Include="Common\Extensions\CollectionExtensions.cs" />
     <Compile Include="Common\Extensions\PropertyInfoExtensions.cs" />
     <Compile Include="Common\Helpers\Reflection.cs" />
     <Compile Include="Common\Interfaces\IContentReader.cs" />
@@ -57,10 +65,22 @@
     <Compile Include="Common\Extensions\CommonExtensions.cs" />
     <Compile Include="Common\HeaderProvider.cs" />
     <Compile Include="Common\Interfaces\IRESTful.cs" />
-    <Compile Include="Common\DescriptionAttribute.cs" />
-    <Compile Include="Common\JsonPathAttribute.cs" />
-    <Compile Include="Common\RESTfulRequest.cs" />
-    <Compile Include="Common\RESTfulResponse.cs" />
+    <Compile Include="Common\Attributes\DescriptionAttribute.cs" />
+    <Compile Include="Common\Attributes\JsonPathAttribute.cs" />
+    <Compile Include="Common\Transaction.cs" />
+    <Compile Include="Common\TransactionValidator.cs" />
+    <Compile Include="Common\RestMethods\Common\BaseClient.cs" />
+    <Compile Include="RESTfulRest.cs" />
+    <Compile Include="Transaction\RESTfulRequest.cs" />
+    <Compile Include="Transaction\RESTfulResponse.cs" />
+    <Compile Include="Common\Attributes\XPathAttribute.cs" />
+    <Compile Include="Common\RESTfulResponseProcessor.cs" />
+    <Compile Include="Common\RestMethods\DeleteMethod.cs" />
+    <Compile Include="Common\RestMethods\GetMethod.cs" />
+    <Compile Include="Common\RestMethods\Common\HttpClientProvider.cs" />
+    <Compile Include="Common\RestMethods\PostMethod.cs" />
+    <Compile Include="Common\RestMethods\PutMethod.cs" />
+    <Compile Include="Common\RestMethods\RestMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\RequestTemplate.cs" />
     <Compile Include="RESTful.cs" />

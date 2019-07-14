@@ -1,9 +1,10 @@
-﻿using RESTy.Common.Content;
-using RESTy.Common.Interfaces;
+﻿using RESTy.Transaction.Content;
+using RESTy.Transaction.Interfaces;
+using System;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
-    public static class ContentReader
+    internal static class ContentReader
     {
         /// <summary>
         /// Takes the provided content and deserialize it in type specified by <see cref="ContentType"/>.
@@ -18,10 +19,13 @@ namespace RESTy.Common
 
             switch (instance.ContentType)
             {
+                case ContentType.None:
+                    throw new InvalidOperationException($"The desired deserialization class has no {nameof(ContentType)}");
                 case ContentType.Json:
                     instance = new JsonContentReader<T>().ProcessContent(content);
                     break;
                 case ContentType.Xml:
+                    instance = new XmlContentReader<T>().ProcessContent(content);
                     break;
                 case ContentType.Form:
                     break;

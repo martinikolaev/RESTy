@@ -1,13 +1,13 @@
-﻿using RESTy.Common;
+﻿using RESTy.Transaction;
 
 namespace RESTy.Templates
 {
-    public class RequestTemplate : RESTFulRequest
+    class RequestTemplate : RESTFulRequest
     {
         public RequestTemplate()
         {
             this.Url = @"myUrl";
-            this.ContentType = ContentType.Json;
+            this.AcceptType = AcceptType.Json;
         }
     }
 }

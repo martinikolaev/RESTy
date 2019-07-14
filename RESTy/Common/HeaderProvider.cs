@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using RestSharp;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     public class KeyValue
     {
@@ -21,24 +22,21 @@ namespace RESTy.Common
         public string Value { get; set; }
     }
 
-    public class HeaderProvider
+    internal class HeaderProvider
     {
         /// <summary>
         /// Returns all headers default and custom
         /// </summary>
-        /// <param name="accessToken"></param>
+        /// <param name="securityToken"></param>
         /// <param name="keyValues"></param>
         /// <returns></returns>
-        public static Dictionary<string, string> GetHeaders(string accessToken, params KeyValue[] keyValues)
+        public static Dictionary<string, string> GetHeaders(string securityToken, params KeyValue[] keyValues)
         {
             var headerCollection = new Dictionary<string, string>();
 
-            if (!string.IsNullOrEmpty(accessToken))
+            if (!string.IsNullOrEmpty(securityToken))
             {
-                headerCollection = new Dictionary<string, string>
-                {
-                    ["Authorization"] = $"Bearer {accessToken}"
-                };
+                headerCollection.Add("Authorization", $"Bearer {securityToken}");
             }
 
             if (keyValues != null && keyValues.Length > 0)
@@ -48,5 +46,18 @@ namespace RESTy.Common
 
             return headerCollection;
         }
+
+        public static List<Parameter> GetRestHeaders(params KeyValue[] keyValues)
+        {
+            var headerCollection = new List<Parameter>();
+
+            if (keyValues != null && keyValues.Length > 0)
+            {
+                keyValues.ToList().ForEach(k => headerCollection.Add(new Parameter(k.Key, k.Value, ParameterType.HttpHeader)));
+            }
+
+            return headerCollection;
+        }
     }
 }
+

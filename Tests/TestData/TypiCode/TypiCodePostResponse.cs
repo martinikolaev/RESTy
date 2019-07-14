@@ -1,10 +1,16 @@
 ﻿using Newtonsoft.Json;
-using RESTy.Common;
+using RESTy.Transaction;
+using RESTy.Transaction.Attributes;
 
 namespace Tests.TestData.TypiCode
 {
     public class TypiCodePostResponse : RESTFulResponse
     {
+        public TypiCodePostResponse()
+        {
+            this.ContentType = ContentType.Json;
+        }
+
         [JsonPath("$")]
         [JsonProperty("TestProperty")]
         public Post[] Posts { get; set; }

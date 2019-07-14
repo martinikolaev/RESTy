@@ -1,32 +1,38 @@
 ﻿using Newtonsoft.Json;
-using RESTy.Common.Extensions;
+using RestSharp;
+using RESTy.Transaction.Extensions;
+using RESTy.Transaction.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
-    public static class ContentProvider
+    internal static class ContentProvider
     {
         #region Public Methods
 
 
-        /// <summary>
-        /// Transforms the object into a selected content type
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public static dynamic GetContent<T>(T obj) where T : RESTFulRequest
+        public static dynamic Provider<T>(T obj) where T: RESTFulRequest
         {
-            if (obj.ContentType == ContentType.Form)
-                return GetFormContent(obj);
-            else if (obj.ContentType == ContentType.Json)
-                return GetJsonContent(obj);
-
+            switch (obj.AcceptType)
+            {
+                case AcceptType.None:
+                    return null;
+                case AcceptType.Json:
+                    return GetJsonContent(obj);
+                case AcceptType.Xml:
+                    break;
+                case AcceptType.Form:
+                    //return GetFormContent(obj);
+                    return GetFormContent(obj);
+                default: throw new InvalidOperationException("Content of the object could not be recognized");
+                    
+            }
             return null;
         }
-
+        
         /// <summary>
         /// Serializes any object into JSON string
         /// </summary>
@@ -44,7 +50,7 @@ namespace RESTy.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="jsonText"></param>
         /// <returns></returns>
-        public static T Deserialize<T>(string jsonText)
+        private static T Deserialize<T>(string jsonText)
         {
             return JsonConvert.DeserializeObject<T>(jsonText);
         }
@@ -59,9 +65,36 @@ namespace RESTy.Common
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        private static IDictionary<string, string> GetFormContent<T>(T obj) where T : RESTFulRequest
+        //private static IDictionary<string, string> GetFormContent<T>(T obj) where T : RESTFulRequest
+        //{
+        //    var form = new Dictionary<string, string>();
+        //    var properties = obj
+        //        .GetType()
+        //        .GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
+        //        .Where(p => p.GetValue(obj, null) != null);
+
+        //    foreach (PropertyInfo prop in properties)
+        //    {
+        //        var currentField = prop.GetValue(obj, null);
+
+        //        if (prop.HasDescription())
+        //            form.Add(prop.GetDescription(), currentField.ToString());
+        //        else
+        //            form.Add(prop.Name, currentField.ToString());
+        //    }
+
+        //    return form;
+        //}
+
+        /// <summary>
+        /// Converts RESTFulRequest object into Dictionary form
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private static List<Parameter> GetFormContent<T>(T obj) where T : RESTFulRequest
         {
-            var form = new Dictionary<string, string>();
+            var form = new List<Parameter>();
             var properties = obj
                 .GetType()
                 .GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
@@ -71,10 +104,11 @@ namespace RESTy.Common
             {
                 var currentField = prop.GetValue(obj, null);
 
-                if (!string.IsNullOrEmpty(prop.GetDescription()))
-                    form.Add(prop.GetDescription(), currentField.ToString());
+                if (prop.HasDescription())
+                    form.Add(new Parameter(prop.GetDescription(), currentField.ToString(), ParameterType.GetOrPost));
                 else
-                    form.Add(prop.Name, currentField.ToString());
+                    form.Add(new Parameter(prop.Name, currentField.ToString(), ParameterType.GetOrPost));
+
             }
 
             return form;

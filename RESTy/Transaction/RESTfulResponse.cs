@@ -1,14 +1,20 @@
-﻿using RESTy.Common.Interfaces;
+﻿using RestSharp;
+using RESTy.Transaction.Attributes;
+using RESTy.Transaction.Interfaces;
 using System.Net;
 
-namespace RESTy.Common
+namespace RESTy.Transaction
 {
     public abstract class RESTFulResponse : IRESTfulResponse
     {
         #region Public Properties
 
-        public RESTFulResponseInternal Response { get; set; }
+        [Required]
         public ContentType ContentType { get; set; }
+
+
+        public RESTFulResponseInternal Response { get; set; }
+        public IRestResponse InternalResponse { get; set; }
 
         #endregion
 

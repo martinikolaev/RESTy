@@ -1,14 +1,14 @@
 ﻿using RESTy.Transaction;
 
-namespace RESTy.Templates
+namespace Tests.TestData.NegaviteScenarios
 {
-    class ResponseTemplate : RESTFulResponse
+    public class DummyResponse : RESTFulResponse
     {
         #region Public Properties
-        
+
         #endregion
 
-        public ResponseTemplate()
+        public DummyResponse()
         {
 
         }

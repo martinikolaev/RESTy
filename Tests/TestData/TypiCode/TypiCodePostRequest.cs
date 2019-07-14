@@ -1,13 +1,20 @@
-﻿using RESTy.Common;
+﻿using RESTy.Transaction;
 
 namespace Tests.TestData.TypiCode
 {
     public class TypiCodePostRequest : RESTFulRequest
     {
-        public TypiCodePostRequest()
+
+        #region Public Properties
+
+        
+
+        #endregion
+
+        public TypiCodePostRequest(string homeUrl)
         {
-            this.Url = "https://jsonplaceholder.typicode.com/posts";
-            this.ContentType = ContentType.Json;
+            this.Url = $@"{homeUrl}/posts";
+            this.AcceptType = AcceptType.Json;
         }
     }
 }
