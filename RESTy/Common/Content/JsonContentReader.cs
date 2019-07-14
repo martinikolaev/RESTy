@@ -63,7 +63,7 @@ namespace RESTy.Transaction.Content
                 //If has no attribute
                 else
                 {
-                    var propertyName = property.Name;
+                    var propertyName = property.Name.ToLower();
                     var jValue = jsonContent[propertyName];
 
                     if (jValue != null)

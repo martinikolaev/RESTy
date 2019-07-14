@@ -12,7 +12,7 @@ namespace Tests
         {
             var request = new RandomBreedsRequest();
 
-            var response = request.POST<RandomBreedsResponse>();
+            var response = request.GET<RandomBreedsResponse>();
 
             Assert.IsNotNull(response);
             Assert.IsFalse(string.IsNullOrEmpty(response.message));
