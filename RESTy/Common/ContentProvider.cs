@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RestSharp;
 using RESTy.Transaction.Extensions;
 using RESTy.Transaction.Interfaces;
 using System;
@@ -13,7 +14,7 @@ namespace RESTy.Transaction
         #region Public Methods
 
 
-        public static dynamic Provide<T>(T obj) where T: RESTFulRequest
+        public static dynamic Provider<T>(T obj) where T: RESTFulRequest
         {
             switch (obj.AcceptType)
             {
@@ -24,6 +25,7 @@ namespace RESTy.Transaction
                 case AcceptType.Xml:
                     break;
                 case AcceptType.Form:
+                    //return GetFormContent(obj);
                     return GetFormContent(obj);
                 default: throw new InvalidOperationException("Content of the object could not be recognized");
                     
@@ -63,9 +65,36 @@ namespace RESTy.Transaction
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        private static IDictionary<string, string> GetFormContent<T>(T obj) where T : RESTFulRequest
+        //private static IDictionary<string, string> GetFormContent<T>(T obj) where T : RESTFulRequest
+        //{
+        //    var form = new Dictionary<string, string>();
+        //    var properties = obj
+        //        .GetType()
+        //        .GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
+        //        .Where(p => p.GetValue(obj, null) != null);
+
+        //    foreach (PropertyInfo prop in properties)
+        //    {
+        //        var currentField = prop.GetValue(obj, null);
+
+        //        if (prop.HasDescription())
+        //            form.Add(prop.GetDescription(), currentField.ToString());
+        //        else
+        //            form.Add(prop.Name, currentField.ToString());
+        //    }
+
+        //    return form;
+        //}
+
+        /// <summary>
+        /// Converts RESTFulRequest object into Dictionary form
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private static List<Parameter> GetFormContent<T>(T obj) where T : RESTFulRequest
         {
-            var form = new Dictionary<string, string>();
+            var form = new List<Parameter>();
             var properties = obj
                 .GetType()
                 .GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
@@ -76,9 +105,10 @@ namespace RESTy.Transaction
                 var currentField = prop.GetValue(obj, null);
 
                 if (prop.HasDescription())
-                    form.Add(prop.GetDescription(), currentField.ToString());
+                    form.Add(new Parameter(prop.GetDescription(), currentField.ToString(), ParameterType.GetOrPost));
                 else
-                    form.Add(prop.Name, currentField.ToString());
+                    form.Add(new Parameter(prop.Name, currentField.ToString(), ParameterType.GetOrPost));
+
             }
 
             return form;

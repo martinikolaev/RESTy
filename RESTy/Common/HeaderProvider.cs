@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RestSharp;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RESTy.Transaction
@@ -45,5 +46,18 @@ namespace RESTy.Transaction
 
             return headerCollection;
         }
+
+        public static List<Parameter> GetRestHeaders(params KeyValue[] keyValues)
+        {
+            var headerCollection = new List<Parameter>();
+
+            if (keyValues != null && keyValues.Length > 0)
+            {
+                keyValues.ToList().ForEach(k => headerCollection.Add(new Parameter(k.Key, k.Value, ParameterType.HttpHeader)));
+            }
+
+            return headerCollection;
+        }
     }
 }
+

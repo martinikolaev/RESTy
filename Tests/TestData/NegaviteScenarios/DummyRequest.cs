@@ -24,7 +24,7 @@ namespace Tests.TestData.NegaviteScenarios
 
         public DummyRequest2()
         {
-            this.Url = "testUrl";
+            this.Url = "http://blahblah.com";
             this.AcceptType = AcceptType.Json;
         }
     }

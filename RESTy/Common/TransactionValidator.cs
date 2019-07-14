@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RESTy.Common
 {
-    internal static class RequestValidator
+    internal static class TransactionValidator
     {
         /// <summary>
         /// Validates that <paramref name="transactionObject"/> has all Required properties instantiated.
@@ -15,9 +15,12 @@ namespace RESTy.Common
         /// <typeparam name="TRequest">Transaction object</typeparam>
         /// <param name="transactionObject"></param>
         /// <exception cref="InvalidOperationException">If non instanciated Required properties are being found.</exception>
-        public static void Validate<TRequest>(TRequest transactionObject) where TRequest : ITransaction
+        public static void RequestValidator<TRequest>(TRequest transactionObject) where TRequest : ITransaction
         {
-            StringBuilder exceptionMessage = new StringBuilder($"The following properties in {transactionObject.GetType()} are declared as Required but not instanciated in this transaction: {Environment.NewLine}");
+            if (transactionObject == null) throw new InvalidOperationException("Transaction Request Object must not be empty or null!");
+
+
+            StringBuilder exceptionMessage = new StringBuilder($"The following properties in {transactionObject.GetType()} are marked as Required but not instanciated in this transaction: {Environment.NewLine}");
 
 
             var violation = Reflection.GetAllProperties(transactionObject)

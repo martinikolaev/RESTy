@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RestSharp;
+using System.Collections.Generic;
 using System.Net.Http;
 
 namespace RESTy.Transaction.RestMethods.Common

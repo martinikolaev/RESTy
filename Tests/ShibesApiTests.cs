@@ -16,7 +16,7 @@ namespace Tests
             var response = request.GET<ShibesResponse>();
 
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Response);
+            Assert.IsNotNull(response.InternalResponse);
             Assert.IsNotNull(response.Urls);
             Assert.IsTrue(response.Urls.Any());
         }

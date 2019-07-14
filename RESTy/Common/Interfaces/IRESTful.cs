@@ -1,4 +1,5 @@
-﻿using RESTy.Transaction.Attributes;
+﻿using RestSharp;
+using RESTy.Transaction.Attributes;
 using System.Collections.Generic;
 
 namespace RESTy.Transaction.Interfaces
@@ -30,6 +31,8 @@ namespace RESTy.Transaction.Interfaces
     {
         #region Public Properties
         RESTFulResponseInternal Response { get; set; }
+
+        IRestResponse InternalResponse { get; set; }
 
         [Required]
         ContentType ContentType { get; set; }

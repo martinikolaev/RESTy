@@ -18,8 +18,22 @@ namespace Tests
             var response = request.GET<TypiCodePostResponse>();
 
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Response);
-            Assert.IsFalse(string.IsNullOrEmpty(response.Response.Content));
+            Assert.IsNotNull(response.InternalResponse);
+            Assert.IsFalse(string.IsNullOrEmpty(response.InternalResponse.Content));
+            Assert.IsNotNull(response.Posts);
+
+        }
+
+        [TestMethod]
+        public void GetAllPostsRestSharp()
+        {
+            var request = new TypiCodePostRequest(homepage);
+
+            var response = request.GET<TypiCodePostResponse>();
+
+            Assert.IsNotNull(response);
+            Assert.IsNotNull(response.InternalResponse);
+            Assert.IsFalse(string.IsNullOrEmpty(response.InternalResponse.Content));
             Assert.IsNotNull(response.Posts);
 
         }
@@ -32,8 +46,8 @@ namespace Tests
             var response = request.GET<TypiUserReponse>();
 
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Response);
-            Assert.IsFalse(string.IsNullOrEmpty(response.Response.Content));
+            Assert.IsNotNull(response.InternalResponse);
+            Assert.IsFalse(string.IsNullOrEmpty(response.InternalResponse.Content));
             Assert.IsNotNull(response.Users);
 
         }
@@ -48,8 +62,8 @@ namespace Tests
             var response = request.GET<TypiUserReponse>();
 
             Assert.IsNotNull(response);
-            Assert.IsNotNull(response.Response);
-            Assert.IsFalse(string.IsNullOrEmpty(response.Response.Content));
+            Assert.IsNotNull(response.InternalResponse);
+            Assert.IsFalse(string.IsNullOrEmpty(response.InternalResponse.Content));
             Assert.IsNotNull(response.Users);
 
         }

@@ -25,15 +25,53 @@ namespace RESTy.Transaction.Content
 
             var instance = new T();
 
-            if (IsJsonArray(content))
-            {
-                instance = this.ProcessJsonArray(JArray.Parse(content), instance);
-            }
-            else
-            {
-                instance = this.ProcessJsonObject(JObject.Parse(content), instance);
-            }
+            var jsonContent = JToken.Parse(content);
+            var properties = Reflection.GetProperties(instance);
 
+            foreach (var property in properties)
+            {
+                //If has JsonPath attribute available
+                if (property.HasJsonPathAttribute())
+                {
+                    var jsonMap = property.GetJsonPath();
+
+                    var jToken = jsonContent.SelectToken(jsonMap);
+
+                    if (jToken != null)
+                    {
+                        this.AssignValue(instance, property, jToken);
+                    }
+
+                    continue;
+                }
+
+                //If has JsonProperty attribute
+                else if (property.HasJsonAttribute())
+                {
+                    var jsonPropName = property.GetJsonPropertyName();
+
+                    var jValue = jsonContent[jsonPropName];
+
+                    if (jValue != null)
+                    {
+                        this.AssignValue(instance, property, jValue);
+                    }
+
+                    continue;
+                }
+
+                //If has no attribute
+                else
+                {
+                    var propertyName = property.Name;
+                    var jValue = jsonContent[propertyName];
+
+                    if (jValue != null)
+                    {
+                        this.AssignValue(instance, property, jValue);
+                    }
+                }
+            }
 
             return instance;
         }
@@ -41,114 +79,6 @@ namespace RESTy.Transaction.Content
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Deserializes JsonArray into an object of type <typeparamref name="T"/>.
-        /// </summary>
-        /// <param name="jArray"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private T ProcessJsonArray(JArray jArray, T obj)
-        {
-            if (jArray == null) return obj;
-
-            var properties = Reflection.GetProperties(obj);
-
-            foreach (var property in properties)
-            {
-                //If has JsonPath attribute available
-                if (property.HasJsonPathAttribute())
-                {
-                    var jsonMap = property.GetJsonPath();
-
-                    var jToken = jArray.SelectToken(jsonMap);
-
-                    if (jToken != null)
-                    {
-                        this.AssignValue(obj, property, jToken);
-                    }
-                }
-                //If has JsonProperty attribute
-                else if (property.HasJsonAttribute())
-                {
-                    var jsonPropName = property.GetJsonPropertyName();
-
-                    var jValue = jArray[jsonPropName];
-
-                    if (jValue != null)
-                    {
-                        this.AssignValue(obj, property, jValue);
-                    }
-                }
-                //If has no attribute
-                else
-                {
-                    var propertyName = property.Name;
-                    var jValue = jArray[propertyName];
-
-                    if (jValue != null)
-                    {
-                        this.AssignValue(obj, property, jValue);
-                    }
-                }
-            }
-
-            return obj;
-        }
-
-        /// <summary>
-        /// Deserializes JsonObject into an object of type <typeparamref name="T"/>.
-        /// </summary>
-        /// <param name="jObject"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private T ProcessJsonObject(JObject jObject, T obj)
-        {
-            if (jObject == null) return obj;
-
-            var properties = Reflection.GetProperties(obj);
-
-            foreach (var property in properties)
-            {
-                //If has JsonPath attribute available
-                if (property.HasJsonPathAttribute())
-                {
-                    var jsonMap = property.GetJsonPath();
-
-                    var jToken = jObject.SelectToken(jsonMap);
-
-                    if (jToken != null)
-                    {
-                        this.AssignValue(obj, property, jToken);
-                    }
-                }
-                //If has JsonProperty attribute
-                else if (property.HasJsonAttribute())
-                {
-                    var jsonPropName = property.GetJsonPropertyName();
-
-                    var jValue = jObject[jsonPropName];
-
-                    if (jValue != null)
-                    {
-                        this.AssignValue(obj, property, jValue);
-                    }
-                }
-                //If has no attribute
-                else
-                {
-                    var propertyName = property.Name;
-                    var jValue = jObject[propertyName];
-
-                    if (jValue != null)
-                    {
-                        this.AssignValue(obj, property, jValue);
-                    }
-                }
-            }
-
-            return obj;
-        }
 
         /// <summary>
         /// Instantiates and set value of variable in an object.
@@ -173,24 +103,6 @@ namespace RESTy.Transaction.Content
                 setMethodInfo.Invoke(obj, new object[] { retrivableObject });
             }
         }
-
-        /// <summary>
-        /// Cheks if the provided Json is JObject or JArray.
-        /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
-        private static bool IsJsonArray(string json)
-        {
-            var token = JToken.Parse(json);
-
-            if (token is JArray)
-                return true;
-            else if (token is JObject)
-                return false;
-            else
-                throw new InvalidOperationException("The content is not JArray nor JObject");
-        }
-
         #endregion
     }
 }
